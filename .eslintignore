@@ -1,0 +1,14 @@
+**/*.svg
+package-lock.json
+coverage/
+*.snap
+.gitignore
+.npmignore
+.editorconfig
+.eslintignore
+node_modules/**/*
+**/*.d.ts
+**/*.md
+config/
+dist/
+lib/
