@@ -13,7 +13,7 @@ Function.prototype.myCall = function (context) {
   }
   const currentContext = context || window
   currentContext.fn = this
-  const params = arguments.length > 1 ? [...arguments].slice(1) : []
+  const params = [...arguments].slice(1)
   const fnReturn = currentContext.fn(...params)
   delete currentContext.fn
   return fnReturn
