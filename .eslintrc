@@ -17,6 +17,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "no-extend-native": "off",
     "comma-dangle": ["error", "always-multiline"],
     "operator-linebreak": ["error", "before"],
     "space-before-function-paren": [
