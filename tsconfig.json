@@ -15,8 +15,8 @@
     "declaration": true,
     "declarationDir": "./dist",
     "paths": {
-      "newProject": ["./src"],
+      "algorithm": ["./src"],
     }
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*"],
 }
