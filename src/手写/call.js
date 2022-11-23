@@ -8,6 +8,9 @@
  * @param {*} context 上下文 this
  */
 Function.prototype.myCall = function (context) {
+  if (typeof this !== 'function') {
+    throw new Error(`Error: ${this}.call is not a function`)
+  }
   const currentContext = context || window
   currentContext.fn = this
   const params = arguments.length > 1 ? [...arguments].slice(1) : []

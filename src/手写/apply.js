@@ -6,6 +6,9 @@
  * @returns
  */
 Function.prototype.myApply = function (context, fnParam) {
+  if (typeof this !== 'function') {
+    throw new Error(`Error: ${this}.call is not a function`)
+  }
   const currentContext = context || window
   currentContext.fn = this
   const fnReturn = currentContext.fn(...fnParam)
