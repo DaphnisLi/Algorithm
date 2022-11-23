@@ -4,6 +4,7 @@
 // 多个参数
 // this（指的是传入的 obj） 可能是 null
 // this 可以设置 fn
+
 /**
  * @param {*} context 上下文 this
  */
