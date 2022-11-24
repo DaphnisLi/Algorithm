@@ -7,6 +7,7 @@ let count = 1
 
 const getUserAction = function (event) {
   container.innerHTML = count++
+  console.log(event)
   return 1
 }
 
