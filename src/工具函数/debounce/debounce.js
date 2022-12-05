@@ -86,7 +86,6 @@ export const debounce5 = function (fn, waitTime, immediate) {
 }
 
 // 新需求: 如果等待时间很久, 不想再等了, 想把防抖的限制取消, 然后再次触发事件又可以继续执行下一个
-
 export const debounce6 = function (fn, waitTime, immediate) {
   let timeout
   const debounced = function (event) {
