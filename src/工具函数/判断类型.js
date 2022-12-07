@@ -20,7 +20,11 @@ const typeMap = {
   '[object JSON]': 'json',
   '[object Error]': 'error',
 }
+export const getType = (value) => typeMap[Object.prototype.toString.call(value)]
 
-const getType = (value) => typeMap[Object.prototype.toString.call(value)]
-
-console.log(getType(''))
+export const isObject = (value) => getType(value) === 'object'
+export const isArray = (value) => getType(value) === 'array'
+export const isMap = (value) => getType(value) === 'map'
+export const isSet = (value) => getType(value) === 'set'
+export const isDate = (value) => getType(value) === 'date'
+export const isError = (value) => getType(value) === 'error'
