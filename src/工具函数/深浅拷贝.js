@@ -1,4 +1,5 @@
-import { isObject, isArray, isMap, isSet } from './判断类型'
+const _ = require('./判断类型')
+
 // 深拷贝: 一个变量内部所有数据全量创建。注意，这里是完全的一份新内存。也可以换句话说：一个变量内部的所有对象都要被拷贝一份，就是深拷贝。
 // 浅拷贝: 只要变量内部对象拷贝的不彻底，那就是浅拷贝。
 
@@ -41,25 +42,25 @@ const deepCopy2 = (data) => {
       objMap.set(data, cloneData) // 后面的流程如果 cloneData 改变, 这里也会同步改变
     }
 
-    if (isObject(data)) {
+    if (_.isObject(data)) {
       for (const key in data) {
         cloneData[key] = traverse(data[key])
       }
     }
 
-    if (isArray(data)) {
+    if (_.isArray(data)) {
       data.forEach((value, index) => {
         cloneData[index] = traverse(value) // 为什么不 push 因为 objMap 依赖 cloneData
       })
     }
 
-    if (isMap(data)) {
+    if (_.isMap(data)) {
       data.forEach((value, key) => {
         cloneData.set(key, traverse(value))
       })
     }
 
-    if (isSet(data)) {
+    if (_.isSet(data)) {
       data.forEach(value => {
         cloneData.add(traverse(value))
       })
