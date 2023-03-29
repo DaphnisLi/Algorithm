@@ -17,6 +17,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "prefer-promise-reject-errors": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-new-wrappers": "off",
     "no-new-object": "off",
