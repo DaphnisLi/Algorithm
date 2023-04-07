@@ -18,7 +18,17 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function(root) {
-
+  if (!root) return 0
+  let max = 0
+  const getNodeDepth = (root) => {
+    if (!root) return 0
+    const left = getNodeDepth(root.left)
+    const right = getNodeDepth(root.right)
+    max = Math.max(max, left + right)
+    return Math.max(left, right) + 1
+  }
+  getNodeDepth(root)
+  return max
 };
 // @lc code=end
 
