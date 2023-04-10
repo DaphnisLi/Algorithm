@@ -17,24 +17,36 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var maxDepth = function (root) {
-  if (!root) return 0
-  let max = 0
-  const queue = [root]
-  while (queue.length) {
-    let len = queue.length
-    while (len--) {
-      const node = queue.shift()
-      if (node.left) {
-        queue.push(node.left)
-      }
-      if (node.right) {
-        queue.push(node.right)
-      }
-    }
-    max++
+// var maxDepth = function (root) {
+//   if (!root) return 0
+//   let max = 0
+//   const queue = [root]
+//   while (queue.length) {
+//     let len = queue.length
+//     while (len--) {
+//       const node = queue.shift()
+//       if (node.left) {
+//         queue.push(node.left)
+//       }
+//       if (node.right) {
+//         queue.push(node.right)
+//       }
+//     }
+//     max++
+//   }
+//   return max
+// }
+
+// 递归版本
+const maxDepth = (root) => {
+  const recursion = (root) => {
+    if (!root) return 0
+    const left = recursion(root.left)
+    const right = recursion(root.right)
+    return Math.max(left, right) + 1
   }
-  return max
+  const res = recursion(root)
+  return res
 }
 
 // @lc code=end

@@ -17,7 +17,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
+var diameterOfBinaryTree = function (root) {
   if (!root) return 0
   let max = 0
   const getNodeDepth = (root) => {
@@ -29,6 +29,6 @@ var diameterOfBinaryTree = function(root) {
   }
   getNodeDepth(root)
   return max
-};
-// @lc code=end
+}
 
+// @lc code=end
