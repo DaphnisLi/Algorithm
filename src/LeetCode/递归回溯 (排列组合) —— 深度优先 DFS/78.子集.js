@@ -13,7 +13,7 @@
 // 输入：nums = [1,2,3]
 // 输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 
-// ? 输入有重复 + 单个元素不可重复 + 输出不可无顺序重复
+// ? 输入无重复 + 单个元素不可重复 + 输出不可无顺序重复
 
 // @lc code=start
 /**
@@ -22,16 +22,10 @@
  */
 var subsets = function (nums) {
   const res = []
-  const uses = {}
   const recursion = (path, index) => {
     res.push(path)
     for (let i = index; i < nums.length; i++) {
-      if (uses[i]) {
-        continue
-      }
-      uses[i] = true
-      recursion([...path, nums[i]])
-      uses[i] = false
+      recursion([...path, nums[i]], i + 1)
     }
   }
   recursion([], 0)

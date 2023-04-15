@@ -27,7 +27,7 @@ var subsetsWithDup = function (nums) {
   const recursion = (path, index) => {
     res.push(path)
     for (let i = index; i < nums.length; i++) {
-      if (uses[i] || (i >= index && nums[i] === nums[i - 1] && !uses[i])) {
+      if (uses[i] || (i >= index && nums[i] === nums[i - 1] && !uses[i - 1])) {
         continue
       }
       uses[i] = true
