@@ -3,8 +3,8 @@ const shuffle1 = (arr) => arr.sort(() => Math.random() - 0.5)
 
 // 2、遍历, 每次都随机交换
 const shuffle2 = (arr) => {
-  for (let i = arr.length - 1; i >= 0; i--) {
-    const randomIndex = Math.ceil(Math.random() * i); // 0 ~ i
+  for (let i = 0; i < arr.length; i++) {
+    const randomIndex = Math.ceil(Math.random() * i); // 0 ~ i / 10
     [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]]
   }
   return arr

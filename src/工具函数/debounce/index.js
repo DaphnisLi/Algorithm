@@ -11,7 +11,7 @@ const getUserAction = function (event) {
   return 1
 }
 
-const debounced = debounce(getUserAction, 10000, true)
+const debounced = debounce(getUserAction, 2000, true)
 // onmousemove 鼠标移动就会触发
 container.onmousemove = debounced
 

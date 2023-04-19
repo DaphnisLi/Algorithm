@@ -1,5 +1,6 @@
 const { arr } = require('./arr')
 
+// 冒泡排序
 const bubbleSort = (arr) => {
   const len = arr.length
   for (let i = 0; i < len; i++) {

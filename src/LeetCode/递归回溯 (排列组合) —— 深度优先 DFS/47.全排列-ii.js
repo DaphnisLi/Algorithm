@@ -31,7 +31,7 @@ var permuteUnique = function (nums) {
       return
     }
     for (let i = 0; i < nums.length; i++) {
-      if (uses[i] || (i - 1 >= 0 && nums[i] === nums[i - 1] && !uses[i - 1])) {
+      if (uses[i] || (i > 0 && nums[i] === nums[i - 1] && !uses[i - 1])) {
         continue
       }
       uses[i] = true
@@ -42,5 +42,6 @@ var permuteUnique = function (nums) {
   recursion([])
   return res
 }
+console.log(permuteUnique([1, 1, 2]))
 
 // @lc code=end

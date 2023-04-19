@@ -14,7 +14,7 @@ const curry = function (fn) {
 }
 
 const fn = curry((a, b, c) => {
-  console.log([a, b, c])
+  // console.log([a, b, c])
 })
 
 fn(1, 2, 3)

@@ -1,5 +1,7 @@
+//
+
 const spliceMaxNum = (arr) => {
-  const copyArr = arr.map(item => `${item}`)
+  // 找到最大的数, 先从 arr 找, 找到当前 index 位置相同的或者最大的
   const getMaxNum = (arr, index) => {
     if (arr.length === 1) return arr[0]
     let maxNum = []
@@ -15,11 +17,17 @@ const spliceMaxNum = (arr) => {
     })
     return getMaxNum(maxNum, index + 1)
   }
+
+  const copyArr = arr.map(item => `${item}`)
   let res = ''
+
   while (copyArr.length) {
+    // 最大的数
     const maxNum = getMaxNum(copyArr, 0)
+    // 删除
     const index = copyArr.indexOf(maxNum)
     copyArr.splice(index, 1)
+    // 拼接
     res += maxNum
   }
   return res

@@ -43,7 +43,6 @@ var removeNthFromEnd = function (head, n) {
     fast = fast.next
   }
   slow.next = slow.next.next
-  console.log(head)
   return list.next
 }
 // @lc code=end

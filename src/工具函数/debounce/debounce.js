@@ -1,3 +1,28 @@
+// 防抖: 如果事件在 n 秒内再次触发, 那就重新计时
+// 主动取消
+// 立即执行
+export const debounce = (fun, waitTime) => {
+  let timeout
+
+  const debounced = () => {
+    timeout && clearTimeout(timeout)
+    timeout = setTimeout(fun, waitTime)
+  }
+
+  // 取消
+  debounced.onCancel = () => {
+    clearTimeout(timeout)
+  }
+
+  // 立即执行
+  debounced.onRun = () => {
+    debounced.onCancel()
+    fun()
+  }
+
+  return debounced
+}
+
 export const debounce1 = function (fn, waitTime) {
   let timeout
   return function () {

@@ -1,12 +1,7 @@
 
 1、输入有重复元素
 - 先 sort
-- uses  uses[i]      i 不重复
-- i - 1 >= index && candidates[i] === candidates[i - 1] && !uses[i - 1]       i - 1 不重复
-
-输入：nums = [1,1,2]
-输出：
-[[1,1,2], [1,2,1], [2,1,1], [1,1,2], [1,2,1], [2,1,1]]
+- i > index && candidates[i] === candidates[i - 1] && candidates[i - 1]       i - 1 不重复
 
 2、防止单个元素重复 + 结果不可以无顺序重复
 - index

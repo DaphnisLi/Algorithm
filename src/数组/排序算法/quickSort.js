@@ -1,6 +1,6 @@
 const { arr } = require('./arr')
 
-// 分解
+// 快速排序
 const partition = (arr, left, right) => {
   const mid = Math.floor((left + right) / 2)
   // mid 左边全是小的, 右边全是大的

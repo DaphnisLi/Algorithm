@@ -31,21 +31,18 @@
  */
 var combinationSum2 = function (candidates, target) {
   candidates.sort((a, b) => a - b)
-  const res = []
   const sum = (arr) => arr.reduce((pre, cur) => pre + cur)
-  const uses = {}
+  const res = []
   const recursion = (path, index) => {
     if (path.length && sum(path) === target) {
       res.push(path)
       return
     }
     for (let i = index; i < candidates.length; i++) {
-      if (sum([...path, candidates[i]]) > target || uses[i] || (i - 1 >= index && candidates[i] === candidates[i - 1] && !uses[i - 1])) {
+      if ((path.length && sum(path) > target) || (i > index && candidates[i] === candidates[i - 1] && candidates[i - 1])) {
         continue
       }
-      uses[i] = true
       recursion([...path, candidates[i]], i + 1)
-      uses[i] = false
     }
   }
   recursion([], 0)

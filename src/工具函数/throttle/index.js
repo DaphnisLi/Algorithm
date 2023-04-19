@@ -1,5 +1,5 @@
 // 防抖: n 秒能只能触发一次事件
-import { throttle2 as throttle } from './throttle.js'
+import { throttle } from './throttle.js'
 
 const container = document.getElementById('container')
 
@@ -7,7 +7,7 @@ let count = 1
 
 const getUserAction = function (event) {
   container.innerHTML = count++
-  console.log(event)
+  console.log(count)
   return 1
 }
 
