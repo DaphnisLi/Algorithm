@@ -1,20 +1,46 @@
-export async function batchRequestApi ({ api, num = 100, params }) {
-  // 接口默认一次最多请求100条数据
-  const chunkParams = params.reduce((pre, cur, index) => {
-    if ((index + 1) % num === 0) {
-      return [[...pre, cur]]
-    }
-    return [...pre, cur]
-  }, [])
-  const requests = chunkParams.map(param => api(param))
-  const datas = await Promise.all(requests).then(data => data)
+// 实现一个并发请求函数concurrencyRequest(urls, maxNum)，要求如下:
+// 要求最大并发数 maxNum
+// 每当有一个请求返回，就留下一个空位，可以增加新的请求
+// 所有请求完成后，结果按照 urls 里面的顺序依次打出（发送请求的函数可以直接使用fetch即可）
 
-  return datas.reduce((result, data) => {
-    const [res, err] = data
-    if (err) {
-      return result
+// 并发请求函数
+const concurrencyRequest = (urls = [], maxNum) => {
+  return new Promise((resolve) => {
+    if (!urls.length) {
+      resolve([])
     }
-    const dataList = res.data
-    return { ...result, ...dataList }
-  }, {})
+    const results = []
+    // 发起请求
+    const request = async () => {
+      const url = urls.shift()
+      try {
+        const res = await fetch(url)
+        results.push(res)
+      } catch (err) {
+        results.push(err)
+      }
+      if (!urls.length) {
+        resolve(results)
+      }
+      request()
+    }
+    // 最大并行数
+    const parallelNum = Math.min(maxNum, urls.length)
+    for (let i = 0; i < parallelNum; i++) {
+      request()
+    }
+  })
 }
+
+const urls = []
+for (let i = 1; i <= 20; i++) {
+  urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`)
+}
+
+const fetch = (url) => {
+  return `请求完成 ${url}`
+}
+
+concurrencyRequest(urls, 3).then(res => {
+  console.log(res)
+})
