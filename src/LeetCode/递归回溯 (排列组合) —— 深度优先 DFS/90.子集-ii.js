@@ -23,19 +23,18 @@
 var subsetsWithDup = function (nums) {
   nums.sort((a, b) => a - b)
   const res = []
-  const uses = {}
   const recursion = (path, index) => {
     res.push(path)
     for (let i = index; i < nums.length; i++) {
-      if (uses[i] || (i >= index && nums[i] === nums[i - 1] && !uses[i - 1])) {
+      if (i > index && nums[i] === nums[i - 1] && nums[i - 1]) {
         continue
       }
-      uses[i] = true
       recursion([...path, nums[i]], i + 1)
-      uses[i] = false
     }
   }
   recursion([], 0)
   return res
 }
+
+console.log(subsetsWithDup([1, 2, 2]))
 // @lc code=end

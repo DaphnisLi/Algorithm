@@ -5,7 +5,7 @@
 // 如果构造函数有返回值并且是一个对象, 那就要丢弃构造函数中 this 的属性, 只返回返回值的对象
 
 const myNew = function (fn, ...params) {
-  const obj = new Object()
+  const obj = {}
   obj.__proto__ = fn.prototype
   const fnReturn = fn.apply(obj, params)
   return typeof fnReturn === 'object' ? fnReturn : obj

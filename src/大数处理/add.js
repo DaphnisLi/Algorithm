@@ -1,9 +1,9 @@
 // 填充、相加、进位、拼接、最后拼接
 
-const add = (num1, num2) => {
-  const maxLen = Math.max(`${num1}`.length, `${num2}`.length)
-  const s1 = `${num1}`.padStart(maxLen, 0)
-  const s2 = `${num2}`.padStart(maxLen, 0)
+const add = (str1, str2) => {
+  const maxLen = Math.max(str1.length, str2.length)
+  const s1 = str1.padStart(maxLen, 0)
+  const s2 = str2.padStart(maxLen, 0)
   let res = ''
   let flag = 0
   for (let i = maxLen - 1; i >= 0; i--) {

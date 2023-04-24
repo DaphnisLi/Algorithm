@@ -38,4 +38,6 @@ var maxProfit = function (prices, fee) {
   return dp[0]
 }
 
+console.log(maxProfit([1, 3, 2, 8, 4, 9], 2))
+
 // @lc code=end
