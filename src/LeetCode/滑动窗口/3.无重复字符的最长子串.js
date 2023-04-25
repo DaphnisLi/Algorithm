@@ -27,6 +27,7 @@ var lengthOfLongestSubstring = function (s) {
     const cur = s[right]
     right++
     uses[cur] = (uses[cur] || 0) + 1
+    // 不一定是和 left 重复, 任何一个元素都有可能
     while (uses[cur] > 1) {
       const cur = s[left]
       left++
