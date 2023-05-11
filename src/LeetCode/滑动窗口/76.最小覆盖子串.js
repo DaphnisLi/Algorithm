@@ -21,44 +21,41 @@
 // 暴力破解: 双层循环, 时间复杂度 n*2
 // 滑动窗口: 时间复杂度 n, 内循环无法估计, 但能肯定远小于 n, 所以当作常数项忽略不计
 var minWindow = function (s, t) {
-  const need = {}
-  for (const value of t) {
-    need[value] = (need[value] || 0) + 1
-  }
-  const needLen = Object.keys(need).length
-  const window = {}
+  let slow = 0
+  let fast = 0
   let minLen = Number.MAX_VALUE
-  let left = 0
-  let right = 0
-  let valid = 0 // 所需字符总数
   let start = 0
-  // 扩张
-  while (right < s.length) {
-    const cur = s[right]
-    right++
-    if (need[cur]) {
+  const needs = {}
+  for (const value of t) {
+    needs[value] = (needs[value] || 0) + 1
+  }
+  const needsLen = Object.keys(needs).length
+  const window = {}
+  let valid = 0
+  while (fast < s.length) {
+    const cur = s[fast]
+    fast++
+    if (needs[cur]) {
       window[cur] = (window[cur] || 0) + 1
-      if (window[cur] === need[cur]) {
+      if (window[cur] === needs[cur]) {
         valid++
       }
     }
-    // 收缩
-    while (valid === needLen) {
-      if (right - left < minLen) {
-        minLen = right - left
-        start = left
+    while (valid === needsLen) {
+      if (fast - slow < minLen) {
+        minLen = fast - slow
+        start = slow
       }
-      const cur = s[left]
-      left++
-      if (need[cur]) {
-        if (window[cur] === need[cur]) {
+      const cur = s[slow]
+      slow++
+      if (needs[cur]) {
+        if (window[cur] === needs[cur]) {
           valid--
         }
         window[cur]--
       }
     }
   }
-
   return minLen === Number.MAX_VALUE ? '' : s.slice(start, start + minLen)
 }
 

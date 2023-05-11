@@ -1,7 +1,8 @@
-// async 是对 Promise
+// async 是对 Promise 的封装
 const async1 = async function () {
   console.log('async1 start')
-  await async2()
+  const res = await async2()
+  console.log(res)
   console.log('async1 end')
 }
 const async2 = async function () {
@@ -10,6 +11,9 @@ const async2 = async function () {
     resolve()
   }).then(function () {
     console.log('promise2')
+  })
+  return new Promise(function (resolve) {
+    resolve('await')
   })
 }
 console.log('script start')
@@ -23,7 +27,7 @@ setTimeout(function () {
     console.log('setTimeout2')
   })
   console.log('setTimeout3')
-}, 0)
+}, 5000)
 async1()
 
 new Promise(function (resolve) {
@@ -33,7 +37,7 @@ new Promise(function (resolve) {
   console.log('promise4')
   setTimeout(function () {
     console.log('setTimeout5')
-  })
+  }, 1000)
 })
 
 console.log('script end')
@@ -44,6 +48,11 @@ console.log('script end')
 // promise3
 // script end
 // promise2
-// async1 end
 // promise4
+// await
+// async1 end
+// setTimeout5
 // setTimeout
+// setTimeout1
+// setTimeout3
+// setTimeout2

@@ -1,6 +1,7 @@
 const { arr } = require('./arr')
 
 // 冒泡排序
+// 二次循环找到最大的数, 放在最后面
 const bubbleSort = (arr) => {
   const len = arr.length
   for (let i = 0; i < len; i++) {

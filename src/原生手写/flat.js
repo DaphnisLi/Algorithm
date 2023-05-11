@@ -33,7 +33,7 @@ const myFlat3 = function (depth = 1) {
 
   let res = this
   while (depth--) {
-    res = [].concat(...res)
+    res = [].concat(...res) // ...res 等价为 (1, [2]), 将各项逐个 concat
   }
   return res
 }
@@ -41,7 +41,7 @@ const myFlat3 = function (depth = 1) {
 Array.prototype.myFlat = myFlat3
 
 const arr = [1, 2, 3, [4, [5, [6]]], 7, [8], 9, [10, [11, [12]]]]
-console.log(arr.myFlat(2))
+console.log(arr.myFlat(3))
 
 module.exports = {
   myFlat1,

@@ -8,13 +8,12 @@
 /**
  * @param {*} context 上下文 this
  */
-Function.prototype.myCall = function (context) {
+Function.prototype.myCall = function (context, ...params) {
   if (typeof this !== 'function') {
     throw new Error(`Error: ${this}.call is not a function`)
   }
   const currentContext = context || window
   currentContext.fn = this
-  const params = [...arguments].slice(1)
   const fnReturn = currentContext.fn(...params)
   delete currentContext.fn
   return fnReturn

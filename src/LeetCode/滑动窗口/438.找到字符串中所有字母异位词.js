@@ -22,36 +22,33 @@
  * @return {number[]}
  */
 var findAnagrams = function (s, p) {
-  const need = {}
+  let slow = 0
+  let fast = 0
+  const needs = {}
   for (const value of p) {
-    need[value] = (need[value] || 0) + 1
+    needs[value] = (needs[value] || 0) + 1
   }
-  const needLen = Object.keys(need).length
+  const needsLen = Object.keys(needs).length
   const window = {}
   let valid = 0
-  let left = 0
-  let right = 0
   const res = []
-
-  // 扩张
-  while (right < s.length) {
-    const cur = s[right]
-    right++
-    if (need[cur]) {
+  while (fast < s.length) {
+    const cur = s[fast]
+    fast++
+    if (needs[cur]) {
       window[cur] = (window[cur] || 0) + 1
-      if (window[cur] === need[cur]) {
+      if (needs[cur] === window[cur]) {
         valid++
       }
     }
-    // 收缩
-    while (valid === needLen) {
-      if (right - left === p.length) {
-        res.push(left)
+    while (valid === needsLen) {
+      if (fast - slow === p.length) {
+        res.push(slow)
       }
-      const cur = s[left]
-      left++
-      if (need[cur]) {
-        if (window[cur] === need[cur]) {
+      const cur = s[slow]
+      slow++
+      if (needs[cur]) {
+        if (needs[cur] === window[cur]) {
           valid--
         }
         window[cur]--

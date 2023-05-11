@@ -1,4 +1,11 @@
-// https://juejin.cn/post/6945319439772434469#heading-20
+// https://juejin.cn/post/6945319439772434469#heading-6
+// 传进来的回调函数 fn 怎么执行
+// Promise 里的函数不能改 this
+// 状态初始化为 pending, 只能修改一次
+// then 接受两个回调函数 (成功、失败), 需要判断状态执行
+// fn 里有 setTimeout 怎么办, resolve、reject 在 setTimeout 里执行, 执行 then 时先保存 resolve、reject 回调, 等到执行 resolve、reject 时再调用。注意如果是连续调用 then, 那么需要循环执行
+// then 链
+
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
 const REJECTED = 'rejected'
@@ -43,14 +50,15 @@ class MyPromise {
   then = (fulfillFun, rejectFun) => {
     const promise = new MyPromise((resolve, reject) => {
       if (this.status === FULFILLED) {
-        const res = fulfillFun(this.value)
-        this.resolvePromise(res, resolve, reject)
+        // 注册微任务
+        queueMicrotask(() => {
+          const res = fulfillFun(this.value)
+          this.resolvePromise(res, resolve, reject)
+        })
       }
       if (this.status === REJECTED) {
         rejectFun(this.error)
       }
-      // 兼容异步情况, 例 2
-      // 调用多个 then, 例 3
       if (this.status === PENDING) {
         this.onFulfilledCallbacks?.push?.(fulfillFun)
         this.onRejectedCallbacks?.push?.(rejectFun)
@@ -63,6 +71,7 @@ class MyPromise {
     if (res instanceof MyPromise) {
       res.then(resolve, reject)
     } else {
+      // 执行下一个 then
       resolve(res)
     }
   }

@@ -6,6 +6,8 @@ const Person = function () {
     console.log(this)
     console.log(this.name)
   }
+  // setTimeout 回调函数执行时, this 为 window
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/setTimeout#%E5%85%B3%E4%BA%8E%E2%80%9Cthis%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98
   setTimeout(this.sayName, 0)
 }
 

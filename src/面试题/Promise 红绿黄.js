@@ -16,6 +16,8 @@ const main = () => {
     return printf(1000, '绿')
   }).then(() => {
     return printf(2000, '黄')
+  }).then(() => {
+    main()
   })
 }
 
