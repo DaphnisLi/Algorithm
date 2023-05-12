@@ -9,7 +9,6 @@ const obj = {
 }
 
 const flatten = (res, obj, keyName) => {
-  if (!obj) return
   if (obj instanceof Array) {
     obj.forEach((item, index) => {
       flatten(res, item, `${keyName}[${index}]`)
