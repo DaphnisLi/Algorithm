@@ -27,5 +27,27 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
+  var twoSum = function (nums, target) {
+    const arr = [...nums].sort((a, b) => a - b)
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+      const sum = arr[left] + arr[right]
+      if (target < sum) {
+        right--
+      } else if (target > sum) {
+        left++
+      } else {
+        return [arr[left], arr[right]]
+      }
+    }
+    return []
+  }
+  return nums.reduce((pre, cur, index) => {
+    const two = twoSum(nums.slice(index + 1), -cur)
+    return two.length ? [...pre, [cur, ...two]] : pre
+  }, [])
 }
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4]))
 // @lc code=end
