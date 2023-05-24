@@ -9,68 +9,55 @@ const _ = require('./判断类型')
 // 不能拷贝函数、Map、Set 等
 const deepCopy1 = (obj) => JSON.parse(JSON.stringify(obj))
 
-// Object、Array、Map、Set —— 递归
-// Boolean、Number、String、Date、Error —— 直接 constructor
-// 循环引用
-// 函数不处理，原因：1、没意义，就算两个对象用了同一个引用的函数也不会有什么问题。2、拷贝一个没啥问题，箭头函数用 eval(() => { })，普通函数用 new Function(...函数参数数组, function () { }')，但关键是普通函数的参数和函数体不好获取，如果直接 fun.toString() 匹配字符串，那么函数情况太复杂了，比如下面的例子
-// const func = function (param1 = { a: 1, b: 2 }, param2 = (param3 = { a: 1, b: 2 }) => { console.log(2) }) {
-//   console.log(1)
-// }
-
-const deepCopy2 = (data) => {
-  // typeof null === 'object'
+const deepCopy2 = (obj) => {
   // 基本数据类型
-  const isBasicType = (value) => value === null || typeof value !== 'function' || typeof value !== 'object'
-
+  const isBasicType = (obj) => obj === null || (typeof obj !== 'object' && typeof obj !== 'function')
   // 存储引用的 map, 防止循环引用
-  const objMap = new WeakMap()
-
+  const objMap = new WeakMap() // WeakMap 是弱引用, 使用完就被垃圾回收了
   // 引用都可以这么初始化
-  const initData = (data) => new data.constructor()
-
-  const traverse = (data) => {
+  // 优点: 不需要判断类型、还可以保留原型中的方法。直接就可以返回一个 {} [] 等。
+  // Object、Array、Map、Set、Date、Error
+  const initData = (obj) => new obj.constructor()
+  const traverse = (obj) => {
     // 基本数据类型
-    if (isBasicType(data)) return data
+    if (isBasicType(obj)) return obj
 
-    // 克隆的数据, 初始化
-    const cloneData = initData(data)
-
-    // 循环引用
-    if (objMap.has(data)) {
-      return objMap.get(data) // 返回 cloneData
-    } else {
-      objMap.set(data, cloneData) // 后面的流程如果 cloneData 改变, 这里也会同步改变
+    if (Object.prototype.toString.call(obj) === '[object RegExp]') {
+      return new RegExp(obj.source, obj.flags) // 模式、参数
     }
-
-    if (_.isObject(data)) {
-      for (const key in data) {
-        cloneData[key] = traverse(data[key])
+    // 克隆的数据, 初始化
+    const cloneData = initData(obj)
+    // 循环引用, 否则会爆栈
+    if (objMap.has(obj)) {
+      return objMap.get(obj)
+    } else {
+      objMap.set(obj, cloneData)
+    }
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
+      // console.log(1)
+      for (const key in obj) {
+        cloneData[key] = traverse(obj[key])
       }
     }
-
-    if (_.isArray(data)) {
-      data.forEach((value, index) => {
+    if (Object.prototype.toString.call(obj) === '[object Array]') {
+      obj.forEach((value, index) => {
         cloneData[index] = traverse(value) // 为什么不 push 因为 objMap 依赖 cloneData
       })
     }
-
-    if (_.isMap(data)) {
-      data.forEach((value, key) => {
+    if (Object.prototype.toString.call(obj) === '[object Map]') {
+      obj.forEach((value, key) => {
         cloneData.set(key, traverse(value))
       })
     }
-
-    if (_.isSet(data)) {
-      data.forEach(value => {
+    if (Object.prototype.toString.call(obj) === '[object Set]') {
+      obj.forEach(value => {
         cloneData.add(traverse(value))
       })
     }
-
-    // Date 和 Error 在初始化的时候就拷贝了
     return cloneData
   }
 
-  const res = traverse(data)
+  const res = traverse(obj)
   return res
 }
 
@@ -81,6 +68,7 @@ map.set('a', '1')
 const set = new Set()
 set.add('a')
 set.add('1')
+
 const target = {
   field1: 1,
   field2: undefined,
@@ -106,5 +94,4 @@ const target = {
   },
 }
 
-console.log(deepCopy1(target))
 console.log(deepCopy2(target))
