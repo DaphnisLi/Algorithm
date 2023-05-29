@@ -14,8 +14,10 @@ const main = (arr) => {
   const recursion = (parentId) => {
     const newArr = arr.filter(item => (item.parentId || '') === parentId)
     return newArr.map(item => {
-      item.children = recursion(item.id)
-      return item
+      return {
+        ...item,
+        children: recursion(item.id),
+      }
     })
   }
   return recursion('')
