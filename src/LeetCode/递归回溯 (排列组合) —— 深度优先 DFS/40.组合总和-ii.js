@@ -39,7 +39,7 @@ var combinationSum2 = function (candidates, target) {
       return
     }
     for (let i = index; i < candidates.length; i++) {
-      if ((path.length && sum(path) > target) || (i > index && candidates[i] === candidates[i - 1] && candidates[i - 1])) {
+      if ((path.length && sum(path) > target) || (i > index && candidates[i] === candidates[i - 1])) {
         continue
       }
       recursion([...path, candidates[i]], i + 1)
@@ -48,4 +48,7 @@ var combinationSum2 = function (candidates, target) {
   recursion([], 0)
   return res
 }
+
+console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8))
+
 // @lc code=end

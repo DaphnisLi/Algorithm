@@ -20,7 +20,6 @@ const isEqual = (a, b) => {
     } else if (aType === 'array') {
       if (a.length !== b.length) return false
       for (let i = 0; i < a.length; i++) {
-        console.log(a[i], b[i])
         if (!isEqual(a[i], b[i])) return false
       }
     }

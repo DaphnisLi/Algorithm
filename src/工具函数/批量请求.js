@@ -19,10 +19,12 @@ const concurrencyRequest = (urls = [], maxNum) => {
       } catch (err) {
         results.push(err)
       }
-      if (!urls.length) {
+
+      if (urls.length) {
+        request()
+      } else {
         resolve(results)
       }
-      request()
     }
     // 最大并行数
     const parallelNum = Math.min(maxNum, urls.length)

@@ -1,4 +1,4 @@
-var name = 2 // 如果是 const 则不会绑定在 window
+var name = 2 // 如果是 const、let 则不会绑定在 window
 
 const Person = function () {
   this.name = 1

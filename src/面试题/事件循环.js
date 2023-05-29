@@ -12,9 +12,12 @@ const async2 = async function () {
   }).then(function () {
     console.log('promise2')
   })
+  // ? 返回一个 Promise, 就会将 then 放在微任务队列的最后面
+  // ? 返回一个普通代码, 就会正常放在微任务队列里
   return new Promise(function (resolve) {
     resolve('await')
   })
+  // return 'await'
 }
 console.log('script start')
 

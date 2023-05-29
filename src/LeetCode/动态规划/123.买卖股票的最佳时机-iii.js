@@ -41,5 +41,6 @@ var maxProfit = function (prices) {
   }
   return dp[len - 1][maxKey][0]
 }
+console.log(maxProfit([3, 3, 5, 0, 0, 3, 1, 4], 2))
 
 // @lc code=end

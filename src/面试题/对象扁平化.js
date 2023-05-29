@@ -8,37 +8,22 @@ const obj = {
   c: 3,
 }
 
-const flatten = (res, obj, keyName) => {
-  if (obj instanceof Array) {
-    obj.forEach((item, index) => {
-      flatten(res, item, `${keyName}[${index}]`)
-    })
-  } else if (obj instanceof Object) {
-    for (const key in obj) {
-      if (obj[key] instanceof Object) {
-        flatten(res, obj[key], `${keyName}.${key}`)
-      } else if (obj[key] instanceof Array) {
-        flatten(res, obj[key], `${keyName}.${key}`)
-      } else {
-        res[`${keyName}.${key}`] = obj[key]
-      }
-    }
-  } else {
-    res[keyName] = obj
-  }
-}
-
 const main = (obj) => {
   const res = {}
-  for (const key in obj) {
-    if (obj[key] instanceof Array) {
-      flatten(res, obj[key], `${key}`)
-    } else if (obj[key] instanceof Object) {
-      flatten(res, obj[key], `${key}`)
+  const recursion = (obj, keyName) => {
+    if (Array.isArray(obj)) {
+      obj.forEach((item, index) => {
+        recursion(item, `${keyName}[${index}]`)
+      })
+    } else if (typeof obj === 'object') {
+      for (const key in obj) {
+        recursion(obj[key], `${keyName && `${keyName}.`}${key}`)
+      }
     } else {
-      res[key] = obj[key]
+      res[keyName] = obj
     }
   }
+  recursion(obj, '')
   return res
 }
 
