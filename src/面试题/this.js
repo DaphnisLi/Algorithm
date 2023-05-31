@@ -32,10 +32,34 @@ const Person = function () {
 //   this.name = 1
 
 //   this.sayName = () => {
-//     console.log(this);
+//     console.log(this)
 //     console.log(this.name)
 //   }
 // }
 // let person = new Person()
 // person.sayName.call({ name: "Nicolas" })
 // 箭头函数不能改 this, Person 1
+
+// 5
+// function Person() {
+//   this.name = 1
+
+//   this.sayName = () => {
+//     console.log(this)
+//     console.log(this.name)
+//   }
+// }
+// console.log(Person.sayName)
+// window undefined
+
+// 6
+// function Person() {
+//   this.name = 1
+
+//   this.sayName = function () {
+//     console.log(this)
+//     console.log(this.name)
+//   }
+// }
+// console.log(Person.sayName())
+// Person 1
