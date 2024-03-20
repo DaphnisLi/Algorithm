@@ -1,4 +1,3 @@
-// 防抖: 如果事件在 n 秒内再次触发, 那就重新计时
 import { debounce6 as debounce } from './debounce.js'
 
 const container = document.getElementById('container')

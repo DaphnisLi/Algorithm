@@ -26,7 +26,7 @@ export const debounce = (fun, waitTime) => {
 export const debounce1 = function (fn, waitTime) {
   let timeout
   return function () {
-    clearTimeout(timeout)
+    timeout && clearTimeout(timeout)
     timeout = setTimeout(fn, waitTime)
   }
 }

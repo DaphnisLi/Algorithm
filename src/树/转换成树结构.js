@@ -12,8 +12,7 @@ const dataArr = [
 
 const main = (arr) => {
   const recursion = (parentId) => {
-    const newArr = arr.filter(item => (item.parentId || '') === parentId)
-    return newArr.map(item => {
+    return arr.filter(item => (item.parentId || '') === parentId).map(item => {
       return {
         ...item,
         children: recursion(item.id),

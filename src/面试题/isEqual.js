@@ -17,15 +17,17 @@ const isEqual = (a, b) => {
         // 对象不在乎顺序
         if (!isEqual(a[key], b[key])) return false
       }
+      return true
     } else if (aType === 'array') {
       if (a.length !== b.length) return false
       for (let i = 0; i < a.length; i++) {
         if (!isEqual(a[i], b[i])) return false
       }
+      return true
     }
     return a === b
   }
   return false
 }
 
-console.log(isEqual([1, 2, 3], [1, 3, 2]))
+console.log(isEqual({ a: 1, b: 2 }, { b: 2, a: 1 }))

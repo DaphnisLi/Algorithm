@@ -14,6 +14,7 @@ const jsonp = ({ url, params, callback }) => {
     document.body.appendChild(script) // 插入到 body 末尾
   })
 }
+
 jsonp({
   url: 'url',
   params: { name: 'Daphnis', age: 24 },
@@ -22,4 +23,4 @@ jsonp({
   console.log(data)
 })
 
-// 响应数据 callback(data)
+// 后端返回 fn(res)

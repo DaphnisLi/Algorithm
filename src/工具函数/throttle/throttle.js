@@ -1,9 +1,9 @@
-// 防抖: n 秒能只能触发一次事件
+// 节流: n 秒内只能触发一次事件
 // setTimeout: n 秒后才会执行
 export const throttle1 = function (fn, waitTime) {
   let timeout
   return function (event) {
-    const context = this
+    const context = this // 保存 this, 防止丢失
     if (!timeout) {
       timeout = setTimeout(function () {
         fn.call(context, event)

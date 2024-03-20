@@ -1,4 +1,3 @@
-// 防抖: n 秒能只能触发一次事件
 import { throttle } from './throttle.js'
 
 const container = document.getElementById('container')

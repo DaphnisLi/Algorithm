@@ -12,6 +12,7 @@ const main = (arr) => {
         res = [...res, ...tempArr]
         recursion(copyArr)
       } else {
+        // 原来的位置
         const index = copyArr.findIndex(item => item.includes(arr[i][0]))
         res.push(copyArr[index].pop())
       }

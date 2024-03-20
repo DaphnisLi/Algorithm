@@ -1,10 +1,14 @@
+// setTimeout 按照时间循序执行
 // async 是对 Promise 的封装
+
 const async1 = async function () {
   console.log('async1 start')
+  // 执行此处微任务后执行下面的代码
   const res = await async2()
   console.log(res)
   console.log('async1 end')
 }
+
 const async2 = async function () {
   new Promise(function (resolve) {
     console.log('promise1')
@@ -19,6 +23,7 @@ const async2 = async function () {
   })
   // return 'await'
 }
+
 console.log('script start')
 
 setTimeout(function () {
@@ -31,6 +36,7 @@ setTimeout(function () {
   })
   console.log('setTimeout3')
 }, 5000)
+
 async1()
 
 new Promise(function (resolve) {

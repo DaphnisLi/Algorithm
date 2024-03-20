@@ -11,6 +11,8 @@ const Person = function () {
   setTimeout(this.sayName, 0)
 }
 
+// ! 第二个输出是 setTimeout
+
 // 1
 // var person = new Person();
 // (person.sayName = person.sayName)()
