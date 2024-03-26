@@ -30,6 +30,7 @@ const getLeftIndex = (nums, target) => {
   let right = nums.length - 1
   while (left <= right) {
     const mid = Math.floor((left + right) / 2)
+    // mid === 0 边界处理
     if (nums[mid] === target && (mid === 0 || nums[mid - 1] < target)) {
       return mid
     }
@@ -47,6 +48,7 @@ const getRightIndex = (nums, target) => {
   let right = nums.length - 1
   while (left <= right) {
     const mid = Math.floor((left + right) / 2)
+    // mid === nums.length - 1 边界处理
     if (nums[mid] === target && (mid === nums.length - 1 || nums[mid + 1] > target)) {
       return mid
     }
@@ -58,5 +60,7 @@ const getRightIndex = (nums, target) => {
   }
   return -1
 }
+
+console.log(searchRange([5, 7, 7, 8, 8, 10], 8))
 
 // @lc code=end

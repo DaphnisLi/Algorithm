@@ -3,15 +3,15 @@
 const spliceMaxNum = (arr) => {
   // 找到最大的数, 先从 arr 找, 找到当前 index 位置相同的或者最大的
   const getMaxNum = (arr, index) => {
-    if (arr.length === 1) return arr[0]
+    let max = arr[0]
+    if (arr.length === 1) return max
     let maxNum = []
-    let max = ''
+
     arr.forEach(item => {
-      if (item[index] > max) {
-        max = item[index]
-        maxNum = []
-        maxNum.push(item)
-      } else if (item[index] === max) {
+      if (item[index] > max[index]) {
+        max = item
+        maxNum = [item]
+      } else if (item[index] === max[index]) {
         maxNum.push(item)
       }
     })

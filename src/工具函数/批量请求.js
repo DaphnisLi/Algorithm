@@ -46,3 +46,46 @@ const fetch = (url) => {
 concurrencyRequest(urls, 3).then(res => {
   console.log(res)
 })
+
+
+
+function requestPool(maxNum) {
+  const urls = []
+  return (url) => {
+    urls.push(url)
+    return new Promise((resolve) => {
+      if (!urls.length) {
+        resolve([])
+      }
+      const results = []
+      // 发起请求
+      const request = async () => {
+        const url = urls.shift()
+        try {
+          const res = await fetch(url)
+          results.push(res)
+        } catch (err) {
+          results.push(err)
+        }
+
+        if (urls.length) {
+          request()
+        } else {
+          resolve(results)
+        }
+      }
+
+      const parallelNum = Math.min(maxNum, urls.length)
+      for (let i = 0; i < parallelNum; i++) {
+        request()
+      }
+    })
+  }
+}
+
+const request = requestPool(3)
+
+request('url1').then((res) => console.log(res)).catch()
+request('url2').then((res) => console.log(res)).catch()
+request('url3').then((res) => console.log(res)).catch()
+request('url4').then((res) => console.log(res)).catch()

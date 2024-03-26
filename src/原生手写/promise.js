@@ -48,6 +48,7 @@ class MyPromise {
   }
 
   then = (fulfillFun, rejectFun) => {
+    // 链式调用
     const promise = new MyPromise((resolve, reject) => {
       if (this.status === FULFILLED) {
         // 注册微任务

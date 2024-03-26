@@ -1,5 +1,5 @@
-const permutations = (arr: string[][]) => arr.reduce((pre, cur) => {
-  const result: string[] = []
+const permutations = (arr) => arr.reduce((pre, cur) => {
+  const result = []
   pre.forEach(p => {
     cur.forEach(c => {
       result.push(p + c)

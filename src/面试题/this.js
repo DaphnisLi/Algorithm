@@ -27,7 +27,7 @@ const Person = function () {
 // let person = new Person()
 // let sayNameCopy = person.sayName
 // sayNameCopy()
-// () 左边是一个 Reference, 单其不是对象, 所以 this 为 window, window 2 window 2
+// () 左边是一个 Reference, 但其不是对象, 所以 this 为 window, window 2 window 2
 
 // 4
 // function Person() {
@@ -52,7 +52,8 @@ const Person = function () {
 //   }
 // }
 // console.log(Person.sayName)
-// window undefined
+// ! TypeError: Person.sayName is not a function
+// 因为函数的 this 是 window
 
 // 6
 // function Person() {
@@ -64,4 +65,5 @@ const Person = function () {
 //   }
 // }
 // console.log(Person.sayName())
-// Person 1
+// ! TypeError: Person.sayName is not a function
+// 因为函数的 this 是 window
