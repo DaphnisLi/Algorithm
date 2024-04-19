@@ -21,7 +21,6 @@ const async2 = async function () {
   return new Promise(function (resolve) {
     resolve('await')
   })
-  // return 'await'
 }
 
 console.log('script start')
@@ -56,10 +55,12 @@ console.log('script end')
 // promise1
 // promise3
 // script end
+
 // promise2
 // promise4
 // await
 // async1 end
+
 // setTimeout5
 // setTimeout
 // setTimeout1

@@ -18,19 +18,18 @@ const spliceMaxNum = (arr) => {
     return getMaxNum(maxNum, index + 1)
   }
 
-  const copyArr = arr.map(item => `${item}`)
   let res = ''
 
-  while (copyArr.length) {
+  while (arr.length) {
     // 最大的数
-    const maxNum = getMaxNum(copyArr, 0)
+    const maxNum = getMaxNum(arr, 0)
     // 删除
-    const index = copyArr.indexOf(maxNum)
-    copyArr.splice(index, 1)
+    const index = arr.indexOf(maxNum)
+    arr.splice(index, 1)
     // 拼接
     res += maxNum
   }
   return res
 }
 
-console.log(spliceMaxNum([7864, 284, 347, 7732, 8498])) // 849878647732347284
+console.log(spliceMaxNum(['7864', '284', '347', '7732', '8498'])) // 849878647732347284
