@@ -67,3 +67,43 @@ const Person = function () {
 // console.log(Person.sayName())
 // ! TypeError: Person.sayName is not a function
 // 因为函数的 this 是 window
+
+
+// 7
+// function foo(something) {
+//   this.a = something
+// }
+
+// const obj1 = {
+//   foo
+// }
+
+// const obj2 = {}
+
+// obj1.foo(2)
+// console.log(obj1.a);
+// obj1.foo.call(obj2, 3)
+// console.log(obj2.a);
+
+// const bar = new obj1.foo(4)
+
+// console.log(obj1.a);
+// console.log(bar.a);
+// 2324
+
+
+// 8
+// function foo() {
+//   return a => {
+//     console.log(this.a)
+//   }
+// }
+// const obj1 = {
+//   a: 2
+// }
+// const obj2 = {
+//   a: 3
+// }
+// const bar = foo.call(obj1)
+// bar.call(obj2)
+// 2
