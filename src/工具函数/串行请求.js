@@ -1,9 +1,3 @@
-// promise串行执行
-
-/**
- * delay()函数功能：延迟函数，依次隔个3，4，5秒的时间在执行代码，并打印对应输出
- * @param {*} time 执行间隔时间
- */
 function delay(time) {
   return new Promise((resolve, reject) => {
     console.log(`wait ${time}s`)
